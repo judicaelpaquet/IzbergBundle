@@ -1,0 +1,35 @@
+﻿{
+  "name" : "judicaelpaquet/izberg",
+  "description" : "An Izberg bundle",
+  "type" : "library",
+  
+  "version": "1.0.0",
+  "authors" : [{
+    "name" : "Nowfel terki",
+    "email" : "nowfel.terki@batiwiz.com"
+  },{
+    "name" : "Judicaël Paquet",
+    "email" : "judicael.paquet@batiwiz.com"
+  }],
+  "keywords" : [
+    "Izberg", "bundle"
+  ],
+  "license" : [
+    "MIT"
+  ],
+  "require" : {
+    "php": ">=7.0.0",
+    "symfony/symfony": ">=3.0.0",
+    "guzzle/guzzle": "*"
+  },
+  "autoload" : {
+    "psr-0" : {
+      "judicaelpaquet\\IzbergBundle" : ""
+    }
+  },
+  "extra" : {
+    "branch-alias" : {
+      "dev-master" : "some_version-dev"
+    }
+  }
+}

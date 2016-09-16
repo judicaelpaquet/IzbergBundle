@@ -1,0 +1,19 @@
+services:
+      izberg_connector:
+        class: judicaelpaquet\IzbergBundle\Service\IzbergConnector
+        arguments: ['%izberg_url%', '@guzzle_client', '@snc_redis.default']
+      izberg_client:
+        class: judicaelpaquet\IzbergBundle\Service\IzbergClient
+        abstract: true
+        calls:
+            - [setIzbergConnector, ['@izberg_connector']]
+            - [setHttpClient, ['@guzzle_client']]
+      izberg_user:
+        class: judicaelpaquet\IzbergBundle\Service\IzbergUser
+        parent: izberg_client
+      izberg_cart:
+        class: judicaelpaquet\IzbergBundle\Service\IzbergCart
+        parent: izberg_client
+      izberg_order:
+        class: judicaelpaquet\IzbergBundle\Service\IzbergOrder
+        parent: izberg_client

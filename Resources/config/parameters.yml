@@ -1,0 +1,6 @@
+parameters:
+    izberg_account_email: "judicael.paquet@batiwiz.com"
+    izberg_account_firstname: "Judicael"
+    izberg_account_lastname: "Paquet"
+    izberg_account_secretkey: "1ad59d8a-6e63-46c6-b643-a8e0d08fdbb1"
+    izberg_url: "http://api.sandbox.iceberg.technology/v1/user/sso/?application=Batiwiz&username=judicaelpaquet&"
