@@ -33,6 +33,7 @@ class IzbergController extends Controller
     public function usersAction()
     {
         $users = $this->get('izberg_user')->getUsers();
+        dump($users);
         return $this->render('::base.html.twig');
     }
 
@@ -43,6 +44,7 @@ class IzbergController extends Controller
     public function userAction(Request $request, int $id)
     {
         $user = $this->get('izberg_user')->getUser($id);
+        dump($user);
         return $this->render('::base.html.twig');
     }
 
@@ -53,6 +55,7 @@ class IzbergController extends Controller
     public function userSchemaAction()
     {
         $userSchema = $this->get('izberg_user')->getUserSchema();
+        dump($userSchema);
         return $this->render('::base.html.twig');
     }
 
@@ -63,6 +66,7 @@ class IzbergController extends Controller
     public function cartsAction()
     {
         $carts = $this->get('izberg_cart')->getCarts();
+        dump($carts);
         return $this->render('::base.html.twig');
     }
 
@@ -73,6 +77,7 @@ class IzbergController extends Controller
     public function cartAction(Request $request, $id)
     {
         $cart = $this->get('izberg_cart')->getCart($id);
+        dump($cart);
         return $this->render('::base.html.twig');
     }
 
@@ -83,6 +88,7 @@ class IzbergController extends Controller
     public function cartSchemaAction()
     {
         $cartSchema = $this->get('izberg_cart')->getCartSchema();
+        dump($cartSchema);
         return $this->render('::base.html.twig');
     }
 }
