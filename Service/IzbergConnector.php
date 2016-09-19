@@ -105,5 +105,4 @@ class IzbergConnector
     {
         return json_decode($this->redis->get('izberg_sso'), true);
     }
-
 }

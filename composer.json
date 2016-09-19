@@ -3,7 +3,7 @@
   "description" : "An Izberg bundle",
   "type" : "library",
   
-  "version": "1.0.0",
+  "version": "1.0.1",
   "authors" : [{
     "name" : "Nowfel terki",
     "email" : "nowfel.terki@batiwiz.com"
@@ -25,11 +25,6 @@
   "autoload" : {
     "psr-0" : {
       "judicaelpaquet\\IzbergBundle" : ""
-    }
-  },
-  "extra" : {
-    "branch-alias" : {
-      "dev-master" : "some_version-dev"
     }
   }
 }
