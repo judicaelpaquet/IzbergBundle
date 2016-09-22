@@ -23,9 +23,14 @@ abstract class IzbergClient
      * @var string
      */
     protected static $baseUri = 'https://api.sandbox.iceberg.technology';
+    /**
+     * @var string
+     */
+    protected $nameSpace;
 
     /**
      * @param IzbergConnector $izbergConnector
+     * @param string $nameSpace
      */
     public function setIzbergConnector(IzbergConnector $izbergConnector)
     {
@@ -42,13 +47,26 @@ abstract class IzbergClient
     }
 
     /**
+     * @param string $namespace
+     */
+    public function setNameSpace(string $nameSpace)
+    {
+       $this->nameSpace = $nameSpace;
+    }
+
+    /**
      * @return array
      */
     public function generateHeader()
     {
+        $namespace = '';
+        if ($this->izbergConnector->getAuthentication()['username'] == 'Anonymous') {
+            $namespace = $this->nameSpace;
+            $namespace = ':'.$namespace;
+        }
         return [
             'Content-Type' => 'application/json',
-            'Authorization' => 'Bearer '.$this->izbergConnector->getAuthentication()['username'].':'.$this->izbergConnector->getAuthentication()['api_key'].''
+            'Authorization' => vsprintf("Bearer %s%s:%s", [$this->izbergConnector->getAuthentication()['username'], $namespace, $this->izbergConnector->getAuthentication()['api_key']]),
         ];
     }
 

@@ -4,3 +4,4 @@ parameters:
     izberg_account_lastname: ""
     izberg_account_secretkey: ""
     izberg_url: ""
+    izberg_namespace: ""

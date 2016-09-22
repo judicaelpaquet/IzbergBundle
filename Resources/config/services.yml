@@ -8,6 +8,7 @@ services:
         calls:
             - [setIzbergConnector, ['@izberg_connector']]
             - [setHttpClient, ['@guzzle_client']]
+            - [setNameSpace, ['%izberg_namespace%']]
       izberg_user:
         class: judicaelpaquet\IzbergBundle\Service\IzbergUser
         parent: izberg_client
