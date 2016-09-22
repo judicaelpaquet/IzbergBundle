@@ -55,7 +55,7 @@ class IzbergConnector
     {
         // If the izberg_sso key already exists in redis, we just have to exit.
 
-        if ($this->getAuthentication() && $this->force == false) {
+        if ($this->getAuthentication() && $this->force === false) {
             return;
         }
 
@@ -115,7 +115,6 @@ class IzbergConnector
     }
 
     /**
-     * <<<<<<< HEAD
      * @param bool $force
      */
     public function setForce(bool $force)
