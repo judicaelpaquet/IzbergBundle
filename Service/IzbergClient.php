@@ -60,7 +60,6 @@ abstract class IzbergClient
     {
         $request = $this->httpClient->get($url);
         $request->setHeaders($this->generateHeader());
-        dump($this->generateHeader());die;
         return $request->send()->json()['objects'];
     }
 

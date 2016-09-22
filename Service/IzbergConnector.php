@@ -54,11 +54,17 @@ class IzbergConnector
     public function connect(string $email = '', string $firstName = '', string $lastName = '', string $secretKey = '')
     {
         // If the izberg_sso key already exists in redis, we just have to exit.
+
         if ($this->getAuthentication() && $this->force == false) {
             return;
         }
 
         // Otherwise, we have to use izberg url to generate a new authentication.
+        if ($this->getAuthentication() && !$this->force) {
+            return;
+        }
+
+        // Otherwise, we have to izberg url to generate a new authentication.
         $request = $this->httpClient->get(
             $this->generateUrl($email, $firstName, $lastName, $secretKey)
         );
@@ -74,8 +80,12 @@ class IzbergConnector
      * @param string $lastName
      * @param string $secretKey
      */
-    public function forceAuthAndConnect(string $email = '', string $firstName = '', string $lastName = '', string $secretKey = '')
-    {
+    public function forceAuthAndConnect(
+        string $email = '',
+        string $firstName = '',
+        string $lastName = '',
+        string $secretKey = ''
+    ) {
         $this->setForce(true);
         $this->connect($email, $firstName, $lastName, $secretKey);
     }
@@ -87,19 +97,25 @@ class IzbergConnector
      * @param string $secretKey
      * @return string
      */
-    public function generateUrl(string $email = '', string $firstName = '', string $lastName = '', string $secretKey = ''):string
+    public function generateUrl(
+        string $email = '',
+        string $firstName = '',
+        string $lastName = '',
+        string $secretKey = ''
+    ):string
     {
         $timestamp = time();
         $toCompose = [$email, $firstName, $lastName, $timestamp];
         $message_auth = hash_hmac('sha1', implode(";", $toCompose), $secretKey);
 
         $url = $this->izbergUrl;
-        $url .= 'first_name='.urlencode($firstName).'&last_name='.urlencode($lastName).'&message_auth='.$message_auth.'&email='.urlencode($email);
-        $url .= '&timestamp='.$timestamp.'&is_staff=true';
+        $url .= 'first_name=' . urlencode($firstName) . '&last_name=' . urlencode($lastName) . '&message_auth=' . $message_auth . '&email=' . urlencode($email);
+        $url .= '&timestamp=' . $timestamp . '&is_staff=true';
         return $url;
     }
 
     /**
+     * <<<<<<< HEAD
      * @param bool $force
      */
     public function setForce(bool $force)
@@ -121,7 +137,7 @@ class IzbergConnector
     public function setAuthentication(Response $response)
     {
         $this->redis->set('izberg_sso', json_encode(
-            json_decode($response->getBody(), true)
+                json_decode($response->getBody(), true)
             )
         );
     }
@@ -133,5 +149,5 @@ class IzbergConnector
     {
         return json_decode($this->redis->get('izberg_sso'), true);
     }
-
 }
+
